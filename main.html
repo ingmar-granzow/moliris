@@ -1,0 +1,61 @@
+<head>
+    <title>moliris</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    {{> topic}}
+</body>
+
+<template name="topic">
+    <h1>Urlaub Dänemark 2015<span class="add fa fa-plus-circle pull-right"></span></h1>
+
+    {{> items_assigned}}
+    {{> items_unassigned}}
+</template>
+
+<template name="items_assigned">
+    <ol class="items assigned">
+        {{#each items}}
+            {{> item}}
+        {{/each}}
+    </ol>
+</template>
+
+<template name="items_unassigned">
+    <ol class="items {{assigned}}">
+        {{#each items}}
+            {{> item}}
+        {{/each}}
+    </ol>
+</template>
+
+<template name="item">
+    <li class="item {{assigned}}">
+        <div class="normalmode">
+            <span class="modifiers">
+                <span class="delete fa fa-times fa-lg"></span>
+                <span class="edit fa fa-pencil-square-o fa-lg"></span>
+            </span>
+            <span class="name">
+                {{name}}
+                {{#if hasNotes}}
+                    <span class="details fa fa-align-left fa-lg"></span>
+                {{/if}}
+            </span>
+            {{#if person}}
+                <span class="person">{{person}}</span>
+            {{/if}}
+        </div>
+        <div class="editmode">
+            <input type="text" class="name" value="{{name}}" placeholder="Name" required>
+            <textarea class="notes" value="{{notes}}" placeholder="Notizen" maxlength="500"></textarea>
+            <input type="text" class="person" value="{{person}}" placeholder="Person">
+            <button type="button" name="submit" class="submit btn">Speichern</button>
+            <button type="button" name="cancel" class="cancel btn">Abbrechen</button>
+        </div>
+    </li>
+</template>
