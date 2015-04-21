@@ -3,7 +3,7 @@
 
 Template.topic.events({
     'click .add': function () {
-        Items.insert({name: 'Neues Element', notes: '', person: ''});
+        Items.insert({name: 'Neues Element', notes: '', person: '', date: new Date()});
     }
 });
 
@@ -15,7 +15,7 @@ Template.items_assigned.helpers({
 
 Template.items_unassigned.helpers({
     items: function () {
-        return Items.find({person: ''});
+        return Items.find({person: ''}, {sort: {date: -1}});
     }
 });
 

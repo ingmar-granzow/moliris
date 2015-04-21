@@ -6,7 +6,9 @@ Meteor.startup(function () {
         _.each(names, function (name) {
             Items.insert({
                 name: name,
-                person: ''
+                notes: '',
+                person: '',
+                date: new Date()
             });
         });
     }
