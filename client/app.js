@@ -1,21 +1,36 @@
 // counter starts at 0
 //Session.setDefault('counter', 0);
 
-Template.topic.events({
+Template.start.events({
+    'click .create': function (event) {
+        var happening = $(event.target).closest('.happening');
+        var newName = happening.find('input.happening').val();
+
+        var uuid = Meteor.uuid();
+        Happenings.insert({name: newName, identifier: uuid});
+
+        Router.go('/events/' + uuid);
+    }
+});
+
+Template.happening.events({
     'click .add': function () {
-        Items.insert({name: 'Neues Element', notes: '', person: '', date: new Date()});
+        var happening = Session.get('happening');
+        Items.insert({happeningID: happening._id, name: 'Neues Element', notes: '', person: '', date: new Date()});
     }
 });
 
 Template.items_assigned.helpers({
     items: function () {
-        return Items.find({person: {$ne: ''}}, {sort: {person: 1}});
+        var happening = Session.get('happening');
+        return Items.find({happeningID: happening ? happening._id : null, person: {$ne: ''}}, {sort: {person: 1}});
     }
 });
 
 Template.items_unassigned.helpers({
     items: function () {
-        return Items.find({person: ''}, {sort: {date: -1}});
+        var happening = Session.get('happening');
+        return Items.find({happeningID: happening ? happening._id : null, person: ''}, {sort: {date: -1}});
     }
 });
 
@@ -53,12 +68,4 @@ Template.item.events({
         event.stopPropagation();
         $(event.target).closest('.item').removeClass('edit');
     }
-/*
-    'click .item.unassigned': function () {
-        Items.update(this._id, {$set: {person: 'Ingmar was here for no reason'}});
-    },
-    'click .item.assigned': function () {
-        Items.update(this._id, {$set: {person: null}});
-    }
-*/
 });

@@ -6,12 +6,16 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
-<body>
-    {{> topic}}
-</body>
+<template name="start">
+    <h1>Veranstaltung anlegen</h1>
+    <div class="happening">
+        <input type="text" class="happening" placeholder="Name der Veranstaltung">
+        <button type="button" name="create" class="create btn">Anlegen</button>
+    </div>
+</template>
 
-<template name="topic">
-    <h1>Grillen Uni-Handball<span class="add fa fa-plus-circle pull-right"></span></h1>
+<template name="happening">
+    <h1>{{name}}<span class="add fa fa-plus-circle pull-right"></span></h1>
 
     {{> items_unassigned}}
     {{> items_assigned}}
