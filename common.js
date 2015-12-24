@@ -10,6 +10,11 @@ Router.route('/', function () {
 	this.render('start');
 });
 
+Router.route('/admin', function () {
+	Session.set('happening', null);
+	this.render('admin');
+});
+
 Router.route('/events/:identifier', function () {
 	var params = this.params;
 	var identifier = params.identifier;

@@ -1,6 +1,12 @@
 // counter starts at 0
 //Session.setDefault('counter', 0);
 
+Template.admin.helpers({
+    happenings: function () {
+        return Happenings.find();
+    }
+});
+
 Template.start.events({
     'click .create': function (event) {
         var happening = $(event.target).closest('.happening');
