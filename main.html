@@ -18,13 +18,17 @@
 <template name="start">
     <h1>Veranstaltung anlegen</h1>
     <div class="happening">
-        <input type="text" class="happening" placeholder="Name der Veranstaltung">
+        <input type="text" class="name" placeholder="Name der Veranstaltung">
+        <textarea class="description" placeholder="Beschreibung" maxlength="500"></textarea>
         <button type="button" name="create" class="create btn">Anlegen</button>
     </div>
 </template>
 
 <template name="happening">
     <h1>{{name}}<span class="add fa fa-plus-circle pull-right"></span></h1>
+    {{#if description}}
+        <p>{{description}}</p>
+    {{/if}}
 
     {{> items_unassigned}}
     {{> items_assigned}}

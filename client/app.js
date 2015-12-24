@@ -10,10 +10,11 @@ Template.admin.helpers({
 Template.start.events({
     'click .create': function (event) {
         var happening = $(event.target).closest('.happening');
-        var newName = happening.find('input.happening').val();
+        var newName = happening.find('input.name').val();
+        var newDesc = happening.find('textarea.description').val();
 
         var uuid = Meteor.uuid();
-        Happenings.insert({name: newName, identifier: uuid});
+        Happenings.insert({name: newName, description: newDesc, identifier: uuid});
 
         Router.go('/events/' + uuid);
     }

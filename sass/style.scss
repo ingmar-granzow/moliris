@@ -34,6 +34,19 @@ h1 {
   line-height: 1em;
 }
 
+.happening {
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+  }
+
+  textarea {
+    height: 8em;
+    margin: 6px 0;
+  }
+}
+
 .add {
   @include transition(color 500ms ease);
 
